@@ -3,10 +3,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:medihome_admin_dashboard/admin_dashboard.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -14,15 +13,11 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen>
     with SingleTickerProviderStateMixin {
-  final _supabase = Supabase.instance.client;
-
-  // اینیمیشن کنٹرولرز
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<double> _scaleAnimation;
   late Animation<double> _rotateAnimation;
 
-  // پریمیم کلر پیلیٹ (Metallic ডार्क Luxe Theme)
   final Color bgDark = const Color(0xFF020617);
   final Color surfaceSlate = const Color(0xFF0F172A);
   final Color electricTeal = const Color(0xFF00D2FF);
@@ -31,8 +26,6 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   void initState() {
     super.initState();
-
-    // एनیمیشن سیٹ اپ (800ms کا پریمیم مائیکرو انٹرایکشن لوپ)
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1200),
@@ -59,10 +52,8 @@ class _SplashScreenState extends State<SplashScreen>
       ),
     );
 
-    // اینیمیشن شروع کریں
     _animationController.forward();
 
-    // 3 سیکنڈ کے پریمیم ہینڈ شیک کے بعد لاگ ان اسکرین پر نیویگیشن
     Timer(const Duration(seconds: 3), () {
       if (mounted) {
         Navigator.pushReplacement(
@@ -86,7 +77,6 @@ class _SplashScreenState extends State<SplashScreen>
       body: Stack(
         alignment: Alignment.center,
         children: [
-          // لوپس بیک گراؤنڈ آرٹ (Glassmorphic Ambient Background Orbs)
           Positioned(
             top: -100,
             left: -100,
@@ -114,8 +104,6 @@ class _SplashScreenState extends State<SplashScreen>
               ),
             ),
           ),
-
-          // مین برانڈنگ اینیمیشن بلاک (Animated Center Content Block)
           AnimatedBuilder(
             animation: _animationController,
             builder: (context, child) {
@@ -128,7 +116,6 @@ class _SplashScreenState extends State<SplashScreen>
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // گلوزنگ میٹیلک برانڈ ہوم لوگو (Glowing Brand Metallic Icon Core)
                         Container(
                           height: 120,
                           width: 120,
@@ -155,7 +142,6 @@ class _SplashScreenState extends State<SplashScreen>
                         ),
                         const SizedBox(height: 28),
 
-                        // برانڈ ٹیکسٹ (Luxe Montserrat Typography)
                         Text(
                           "MediHome",
                           style: GoogleFonts.montserrat(
@@ -184,7 +170,6 @@ class _SplashScreenState extends State<SplashScreen>
             },
           ),
 
-          // ریموٹ بوٹم لوڈر انٹرایکشن (Sleek Minimal Progress Indicator)
           Positioned(
             bottom: 60,
             child: Opacity(

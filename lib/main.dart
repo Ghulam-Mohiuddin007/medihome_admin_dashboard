@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:medihome_admin_dashboard/admin_dashboard.dart';
 import 'package:medihome_admin_dashboard/splash_screen.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   await Supabase.initialize(
     url: 'https://xguuoyuucgsxtubiqfzn.supabase.co',
-    anonKey: 'sb_publishable_6cO0RCcbibOJktSmoRgqMg_LTVWIFtP',
+    anonKey: 'sb_publishable_6cO0RCcbibOJktSmoRgqMg_LTVWIFtP', // ignore: deprecated_member_use
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

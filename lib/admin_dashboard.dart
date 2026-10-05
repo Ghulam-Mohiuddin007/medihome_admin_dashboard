@@ -4,7 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class AdminDashboardScreen extends StatefulWidget {
-  const AdminDashboardScreen({Key? key}) : super(key: key);
+  const AdminDashboardScreen({super.key});
 
   @override
   State<AdminDashboardScreen> createState() => _AdminDashboardScreenState();
@@ -584,11 +584,12 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen>
                 .limit(3),
             builder: (context, snap) {
               final locs = snap.data ?? [];
-              if (locs.isEmpty)
+              if (locs.isEmpty) {
                 return const Text(
                   "Calculating deployment clusters...",
                   style: TextStyle(color: Colors.grey),
                 );
+              }
 
               return Column(
                 children: locs.map((l) {
@@ -836,10 +837,11 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen>
           child: FutureBuilder<List<Map<String, dynamic>>>(
             future: _supabase.from('view_staff_analytics').select('*'),
             builder: (context, snapshot) {
-              if (!snapshot.hasData)
+              if (!snapshot.hasData) {
                 return Center(
                   child: CircularProgressIndicator(color: electricTeal),
                 );
+              }
 
               final rawStaffList = snapshot.data!;
               final filteredStaffList = _selectedStaffCategory == 'all'
@@ -883,7 +885,8 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen>
                             const Color(0xFF020617),
                           ),
                           horizontalMargin: 24,
-                          dataRowHeight: 65,
+                          dataRowMinHeight: 65,
+                          dataRowMaxHeight: 65,
                           columns: [
                             DataColumn(
                               label: Text(
@@ -1071,10 +1074,11 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen>
           child: FutureBuilder<List<Map<String, dynamic>>>(
             future: _supabase.from('view_user_analytics').select('*'),
             builder: (context, snapshot) {
-              if (!snapshot.hasData)
+              if (!snapshot.hasData) {
                 return Center(
                   child: CircularProgressIndicator(color: electricTeal),
                 );
+              }
               final userList = snapshot.data!;
 
               return ListView.builder(
@@ -1086,10 +1090,12 @@ class _AdminDashboardScreenState extends State<AdminDashboardScreen>
                       userRow['customer_segmentation'] ?? 'New Profile';
 
                   Color segmentColor = const Color(0xFF94A3B8);
-                  if (segmentation == 'Premium Loyal')
+                  if (segmentation == 'Premium Loyal') {
                     segmentColor = metallicGold;
-                  if (segmentation == 'Occasional Buyer')
+                  }
+                  if (segmentation == 'Occasional Buyer') {
                     segmentColor = electricTeal;
+                  }
 
                   return Container(
                     margin: const EdgeInsets.only(bottom: 14),
